@@ -3,8 +3,8 @@
 module OrderFlow
   class Order < ApplicationRecord
     belongs_to :order, optional: true, class_name: 'OrderFlow::Order'
-    has_many :stages
-    has_many :items
+    has_many :stages, foreign_key: :order_flow_order_id
+    has_many :items, foreign_key: :order_flow_order_id
     after_initialize { |order| order.uuid = generate_uuid }
 
     def percent

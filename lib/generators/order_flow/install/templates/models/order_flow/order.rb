@@ -5,7 +5,7 @@ module OrderFlow
     belongs_to :order, optional: true, class_name: 'OrderFlow::Order'
     has_many :stages, foreign_key: :order_flow_order_id
     has_many :items, foreign_key: :order_flow_order_id
-    after_initialize { |order| order.uuid = generate_uuid }
+    after_initialize :generate_uuid
 
     def percent
       stages.where(status: OrderFlow::Status::PROCESSED).average(:weight) || 0.0
@@ -14,7 +14,7 @@ module OrderFlow
     private
 
     def generate_uuid
-      UUID7.generate
+      self.uuid ||= UUID7.generate
     end
   end
 end

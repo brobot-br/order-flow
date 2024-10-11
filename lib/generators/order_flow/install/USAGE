@@ -1,0 +1,18 @@
+Description:
+    Generator Models:
+        * Flow::Order
+        * Flow::Stage
+        * Flow::Item
+        * Flow::Status
+
+Example:
+    bin/rails generate order_flow:install
+
+    This will create:
+        db/migrate/#{timestamp}_create_order_flow_orders.rb
+        db/migrate/#{timestamp}_create_order_flow_stages.rb
+        db/migrate/#{timestamp}_create_order_flow_items.rb
+        app/models/order_flow/order.rb
+        app/models/order_flow/stage.rb
+        app/models/order_flow/item.rb
+        app/models/order_flow/status.rb

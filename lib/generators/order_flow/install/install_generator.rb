@@ -6,14 +6,14 @@ module OrderFlow
     source_root File.expand_path('templates', __dir__)
 
     def create_migrates
-      %w[orders stages items].each do |name|
+      %w[orders events stages items].each do |name|
         migration_template "migrate/create_order_flow_#{name}.rb",
                            "db/migrate/create_order_flow_#{name}.rb"
       end
     end
 
     def create_models
-      %w[order stage item status].each do |name|
+      %w[order event stage item status].each do |name|
         copy_file "models/order_flow/#{name}.rb",
                   "app/models/order_flow/#{name}.rb"
       end

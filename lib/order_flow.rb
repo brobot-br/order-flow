@@ -2,8 +2,8 @@
 
 require 'order_flow/version'
 require 'order_flow/engine'
+
+require 'order_flow/order_history'
 require 'uuid7'
 
-module OrderFlow
-  # Your code goes here...
-end
+module OrderFlow; end

@@ -9,26 +9,32 @@ module OrderFlow
     end
 
     def save(**options)
-      _save(**options)
+      _save(**options) { super(**options) }
     end
 
     def save!(**options)
-      _save(**options)
+      _save(**options) { super(**options) }
     end
 
     private
 
-    def _save(**options)
-      params = {
+    def _save(**options, &block)
+      history_params = _history_params
+      result = block.call(**options)
+      OrderFlow::Event.create(history_params) if result && history_params.present?
+      result
+    end
+
+    def _history_params
+      return unless changes.present?
+
+      self.version += 1
+      {
         mutation: changes,
         author: updated_by || created_by,
         created_at: DateTime.now,
         order: self
       }
-      self.version += 1
-      result = super(**options)
-      OrderFlow::Event.create(params) if result && changes.present?
-      result
     end
 
     def _default_value

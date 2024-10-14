@@ -9,6 +9,16 @@ module OrderFlow
     end
 
     def save(**options)
+      _save(**options)
+    end
+
+    def save!(**options)
+      _save(**options)
+    end
+
+    private
+
+    def _save(**options)
       params = {
         mutation: changes,
         author: updated_by || created_by,
@@ -17,11 +27,9 @@ module OrderFlow
       }
       self.version += 1
       result = super(**options)
-      OrderFlow::Event.create(params) if result
+      OrderFlow::Event.create(params) if result && changes.present?
       result
     end
-
-    private
 
     def _default_value
       self.uuid ||= UUID7.generate

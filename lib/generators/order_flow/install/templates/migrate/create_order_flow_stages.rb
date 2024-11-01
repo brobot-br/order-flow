@@ -11,11 +11,11 @@ class CreateOrderFlowStages < ActiveRecord::Migration[6.1]
       t.integer :index, null: false, default: 0
       t.jsonb :attr, default: {}
 
-      t.boolean :valid, null: false, default: true
+      t.boolean :stage_valid, null: false, default: true
       t.references :order_flow_order, null: false, foreign_key: true
       t.timestamps
     end
 
-    add_index :order_flow_stages, %i[order_flow_order_id valid index], unique: true
+    add_index :order_flow_stages, %i[order_flow_order_id stage_valid index], unique: true
   end
 end

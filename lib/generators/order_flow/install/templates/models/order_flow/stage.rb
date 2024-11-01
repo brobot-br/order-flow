@@ -3,5 +3,6 @@
 module OrderFlow
   class Stage < ApplicationRecord
     belongs_to :order, class_name: 'OrderFlow::Order', foreign_key: :order_flow_order_id
+    alias_attribute :order_id, :order_flow_order_id
   end
 end

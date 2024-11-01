@@ -5,7 +5,7 @@ class CreateOrderFlowStages < ActiveRecord::Migration[6.1]
     create_table :order_flow_stages do |t|
       t.string :name
       t.string :description
-      t.string :status, null: false, default: :unprocessed
+      t.integer :status, null: false, default: 0
 
       t.float :weight, null: false, default: 0.0
       t.integer :index, null: false, default: 0

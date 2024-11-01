@@ -9,7 +9,7 @@ class CreateOrderFlowOrders < ActiveRecord::Migration[6.1]
 
       t.string :requested_by, null: false
       t.string :created_by, null: false
-      t.string :status, null: false
+      t.integer :status, null: false
 
       t.string :description
       t.string :kind
@@ -27,6 +27,6 @@ class CreateOrderFlowOrders < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_index :order_flow_orders, :uuid
+    add_index :order_flow_orders, :uuid, unique: true
   end
 end

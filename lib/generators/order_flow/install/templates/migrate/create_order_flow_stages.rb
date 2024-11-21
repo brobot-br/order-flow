@@ -16,6 +16,9 @@ class CreateOrderFlowStages < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_index :order_flow_stages, %i[order_flow_order_id stage_valid index], unique: true
+    add_index :order_flow_stages,
+              %i[order_flow_order_id stage_valid index],
+              unique: true,
+              name: :i_order_flow_stages_on_order_flow_order_id_and_valid_and_index
   end
 end

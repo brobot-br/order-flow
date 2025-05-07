@@ -19,6 +19,11 @@ module OrderFlow
       end
     end
 
+    def create_base_flow
+      copy_file 'order_flows/base_flow.rb',
+                'app/order_flows/base_flow.rb'
+    end
+
     def self.next_migration_number(dirname)
       next_migration_number = current_migration_number(dirname) + 1
       ActiveRecord::Migration.next_migration_number(next_migration_number)

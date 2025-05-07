@@ -28,10 +28,9 @@ module OrderFlow
     def _history_params
       return unless changes.present?
 
-      self.version += 1
       {
         mutation: changes,
-        author: updated_by || created_by,
+        author: author || updated_by || created_by,
         created_at: DateTime.now,
         order: self
       }
@@ -40,7 +39,7 @@ module OrderFlow
     def _default_value
       self.uuid ||= UUID7.generate
       self.status ||= OrderFlow::Status::UNPROCESSED
-      self.version ||= 0
+      self.lock_version ||= 0
     end
   end
 end

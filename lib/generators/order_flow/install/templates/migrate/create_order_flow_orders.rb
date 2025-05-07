@@ -17,7 +17,7 @@ class CreateOrderFlowOrders < ActiveRecord::Migration[6.1]
 
       t.string :updated_by
       t.string :searchable
-      t.integer :version, null: false
+      t.integer :lock_version, null: false
 
       t.jsonb :input, default: {}
       t.jsonb :result, default: {}

@@ -9,5 +9,7 @@ module OrderFlow
     has_many :items, foreign_key: :order_flow_order_id
     has_many :events, foreign_key: :order_flow_order_id
     alias_attribute :order_id, :order_flow_order_id
+
+    attr_accessor :author
   end
 end
